@@ -11,6 +11,9 @@ object Functions {
     }
 }
 
+fun Any?.equalsOneOf(vararg options: Any?): Boolean =
+    options.any { this == it }
+
 inline val String?.noControlCodes: String
     get() {
         val s = this ?: return ""

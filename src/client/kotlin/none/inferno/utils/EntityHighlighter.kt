@@ -2,7 +2,7 @@ package none.inferno.utils
 
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.LivingEntity
-import none.inferno.references.Functions.removeIfKey
+import none.inferno.utils.Functions.removeIfKey
 import java.awt.Color
 import java.util.concurrent.ConcurrentHashMap
 

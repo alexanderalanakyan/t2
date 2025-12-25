@@ -1,9 +1,10 @@
 package none.inferno.features
 
-import none.inferno.references.Category
+import org.lwjgl.glfw.GLFW
 
 abstract class Module(
     val name: String,
+    val key: Int? = GLFW.GLFW_KEY_UNKNOWN,
     var description: String,
     toggled: Boolean = false,
 ){
@@ -11,11 +12,17 @@ abstract class Module(
         private set
     init {}
 
+
     open fun onEnable() {
 
     }
     open fun onDisable() {
 
+    }
+
+
+    open fun onKeybind() {
+        toggle()
     }
     val category = getCategory(this::class.java) ?: Category.MISC
 

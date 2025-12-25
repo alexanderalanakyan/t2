@@ -19,8 +19,8 @@ import net.minecraft.client.renderer.ShapeRenderer
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.phys.AABB
 import net.minecraft.world.phys.Vec3
-import none.inferno.references.BasicReferences
-import none.inferno.references.Pipelines
+import none.inferno.references.BoxRenderPipelines
+import none.inferno.references.modid
 import org.joml.Vector3f
 import org.joml.Vector4f
 import org.lwjgl.system.MemoryUtil
@@ -159,10 +159,10 @@ class Render {
     ) {
 
         val pipeline = when {
-            wireframe && culling -> Pipelines.linesPipeline
-            wireframe && !culling -> Pipelines.unculledLinesPipeline
-            !wireframe && culling -> Pipelines.boxPipeline
-            else -> Pipelines.unculledLinesPipeline
+            wireframe && culling -> BoxRenderPipelines.linesPipeline
+            wireframe && !culling -> BoxRenderPipelines.unculledLinesPipeline
+            !wireframe && culling -> BoxRenderPipelines.boxPipeline
+            else -> BoxRenderPipelines.unculledLinesPipeline
         }
 
         pushToRenderMatrix(context, pipeline, target, wireframe, r, g, b, a)
@@ -206,7 +206,7 @@ class Render {
 
             vertexBuffer = MappableRingBuffer(
                 {
-                    "${BasicReferences.modid} render pipeline"
+                    "${modid} render pipeline"
                 },
                 GpuBuffer.USAGE_VERTEX or GpuBuffer.USAGE_MAP_WRITE,
                 vertexBufferSize
@@ -263,7 +263,7 @@ class Render {
         val renderPass : RenderPass = RenderSystem.getDevice()
             .createCommandEncoder()
             .createRenderPass(
-                { "${BasicReferences.modid} render pipeline" },
+                { "${modid} render pipeline" },
                 client.mainRenderTarget.colorTextureView,
                 OptionalInt.empty(),
                 client.mainRenderTarget.depthTextureView,
